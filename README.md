@@ -1,12 +1,5 @@
 # Definitional Leakage in ML Prediction of Paired Triglyceride-Response Phenotypes
 ## A Reproducible Synthetic-Data Benchmark
-
-[![CI](https://github.com/your-org/tcr-leakage-benchmark/actions/workflows/ci.yml/badge.svg)](https://github.com/your-org/tcr-leakage-benchmark/actions/workflows/ci.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX)
-[![Reproducible](https://img.shields.io/badge/reproducibility-seeds%20fixed-green.svg)](#reproducibility)
-
 ---
 
 ## Overview
@@ -337,30 +330,6 @@ Test coverage includes:
 - Scaler fold-sealing
 - Label threshold fold-sealing
 - Clean predictor list integrity (no TG4h, no TCR)
-
----
-
-## Citing This Work
-
-```bibtex
-@article{tcr-leakage-benchmark-2026,
-  title   = {Definitional leakage in machine-learning prediction of paired
-             triglyceride-response phenotypes: a reproducible synthetic-data benchmark},
-  journal = {BMC Bioinformatics},
-  year    = {2026},
-  doi     = {10.5281/zenodo.XXXXXXX}
-}
-```
-
-See also [CITATION.cff](CITATION.cff) for machine-readable citation metadata.
-
----
-
-## License
-
-This project is licensed under the **MIT License** — see [LICENSE](LICENSE) for details.
-
-The synthetic data and all generated outputs are released under [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/) (public domain dedication).
 
 ---
 
