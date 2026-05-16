@@ -1,0 +1,134 @@
+{
+  "tg0h_shift": {
+    "shifted": {
+      "AUROC": 0.5244,
+      "Brier": 0.186,
+      "ECE": 0.0715,
+      "cal_slope": 0.1857,
+      "cal_intercept": -1.0135,
+      "prevalence": 0.2313
+    },
+    "recalibration": {
+      "raw": {
+        "label": "raw",
+        "brier": 0.1878,
+        "ece": 0.0785,
+        "cal_slope": 0.1126,
+        "cal_intercept": -1.0823
+      },
+      "platt": {
+        "label": "platt",
+        "brier": 0.1808,
+        "ece": 0.0439,
+        "cal_slope": 0.1722,
+        "cal_intercept": -0.9855
+      },
+      "isotonic": {
+        "label": "isotonic",
+        "brier": 0.1831,
+        "ece": 0.0583,
+        "cal_slope": 0.0327,
+        "cal_intercept": -1.1364
+      }
+    }
+  },
+  "bmi_shift": {
+    "shifted": {
+      "AUROC": 0.5426,
+      "Brier": 0.1846,
+      "ECE": 0.0571,
+      "cal_slope": 0.2975,
+      "cal_intercept": -0.915,
+      "prevalence": 0.2313
+    },
+    "recalibration": {
+      "raw": {
+        "label": "raw",
+        "brier": 0.1862,
+        "ece": 0.0606,
+        "cal_slope": 0.2259,
+        "cal_intercept": -0.9784
+      },
+      "platt": {
+        "label": "platt",
+        "brier": 0.1807,
+        "ece": 0.0351,
+        "cal_slope": 0.2626,
+        "cal_intercept": -0.8696
+      },
+      "isotonic": {
+        "label": "isotonic",
+        "brier": 0.1958,
+        "ece": 0.0495,
+        "cal_slope": 0.0127,
+        "cal_intercept": -1.1714
+      }
+    }
+  },
+  "noise_shift": {
+    "shifted": {
+      "AUROC": 0.5296,
+      "Brier": 0.2234,
+      "ECE": 0.0782,
+      "cal_slope": 0.1906,
+      "cal_intercept": -0.5756,
+      "prevalence": 0.3147
+    },
+    "recalibration": {
+      "raw": {
+        "label": "raw",
+        "brier": 0.2244,
+        "ece": 0.0844,
+        "cal_slope": 0.1508,
+        "cal_intercept": -0.6146
+      },
+      "platt": {
+        "label": "platt",
+        "brier": 0.2165,
+        "ece": 0.0152,
+        "cal_slope": 0.3843,
+        "cal_intercept": -0.4688
+      },
+      "isotonic": {
+        "label": "isotonic",
+        "brier": 0.22,
+        "ece": 0.0507,
+        "cal_slope": -0.0087,
+        "cal_intercept": -0.7837
+      }
+    }
+  },
+  "prevalence_shift": {
+    "shifted": {
+      "AUROC": 0.5363,
+      "Brier": 0.185,
+      "ECE": 0.0557,
+      "cal_slope": 0.2028,
+      "cal_intercept": -0.9858,
+      "prevalence": 0.2313
+    },
+    "recalibration": {
+      "raw": {
+        "label": "raw",
+        "brier": 0.1862,
+        "ece": 0.0576,
+        "cal_slope": 0.1645,
+        "cal_intercept": -1.0208
+      },
+      "platt": {
+        "label": "platt",
+        "brier": 0.179,
+        "ece": 0.0203,
+        "cal_slope": 0.3425,
+        "cal_intercept": -0.7717
+      },
+      "isotonic": {
+        "label": "isotonic",
+        "brier": 0.1809,
+        "ece": 0.0443,
+        "cal_slope": -0.0053,
+        "cal_intercept": -1.203
+      }
+    }
+  }
+}

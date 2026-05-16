@@ -1,0 +1,5 @@
+scenario,n,n_seeds,AUROC_mean,AUROC_sd,AUROC_p2_5,AUROC_p97_5,pct_null_range
+null,1500,100,0.5015,0.0253,0.4427,0.5431,95.0
+weak_signal,1500,100,0.582,0.0218,0.5356,0.6215,8.0
+moderate_signal,1500,100,0.6719,0.0172,0.6427,0.7047,0.0
+wbv_positive,1500,100,0.8326,0.0121,0.8089,0.853,0.0

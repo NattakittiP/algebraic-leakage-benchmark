@@ -1,0 +1,180 @@
+{
+  "file": "data\\paired_tcr_weak_signal_v1_seed2026.csv",
+  "n": 1500,
+  "scenario": "weak_signal",
+  "checks": [
+    {
+      "check": "WBV formula",
+      "pass": true,
+      "max_abs_error": 0.006799999999999251
+    },
+    {
+      "check": "TG4h > 0",
+      "pass": true,
+      "n_negative": 0
+    },
+    {
+      "check": "TG4h derivation from TG0h and TCR",
+      "pass": true,
+      "max_abs_error": 0.10392000000001644
+    },
+    {
+      "check": "Sex prevalence",
+      "pass": true,
+      "observed_p_male": 0.466,
+      "expected_p_male": 0.485
+    },
+    {
+      "check": "age range [18, 75]",
+      "pass": true,
+      "n_out_of_range": 0,
+      "actual_min": 23.6,
+      "actual_max": 74.9
+    },
+    {
+      "check": "bmi range [16, 33]",
+      "pass": true,
+      "n_out_of_range": 0,
+      "actual_min": 16.3,
+      "actual_max": 32.9
+    },
+    {
+      "check": "hct range [30, 55]",
+      "pass": true,
+      "n_out_of_range": 0,
+      "actual_min": 31.5,
+      "actual_max": 53.8
+    },
+    {
+      "check": "tp range [5.0, 8.9]",
+      "pass": true,
+      "n_out_of_range": 0,
+      "actual_min": 5.03,
+      "actual_max": 8.64
+    },
+    {
+      "check": "hdl range [25, 87]",
+      "pass": true,
+      "n_out_of_range": 0,
+      "actual_min": 25.2,
+      "actual_max": 83.6
+    },
+    {
+      "check": "ldl range [70, 215]",
+      "pass": true,
+      "n_out_of_range": 0,
+      "actual_min": 70.2,
+      "actual_max": 214.4
+    },
+    {
+      "check": "tg0h range [350, 1750]",
+      "pass": true,
+      "n_out_of_range": 0,
+      "actual_min": 398.7,
+      "actual_max": 1624.6
+    },
+    {
+      "check": "tcr range [-10, 99.9]",
+      "pass": true,
+      "n_out_of_range": 0,
+      "actual_min": -10.0,
+      "actual_max": 99.9
+    },
+    {
+      "check": "tg4h range [0, 1300]",
+      "pass": true,
+      "n_out_of_range": 0,
+      "actual_min": 0.4,
+      "actual_max": 997.6
+    }
+  ],
+  "tost_tests": [
+    {
+      "equivalent": true,
+      "p_lower": 1.0618301758327741e-11,
+      "p_upper": 1.7973331939563185e-08,
+      "margin": 1.5,
+      "sample_mean": 53.147733333333335,
+      "reference_mean": 53.0,
+      "variable": "age"
+    },
+    {
+      "equivalent": true,
+      "p_lower": 1.1424701078063478e-13,
+      "p_upper": 8.99494388240503e-07,
+      "margin": 0.44999999999999996,
+      "sample_mean": 24.09613333333333,
+      "reference_mean": 24.0,
+      "variable": "bmi"
+    },
+    {
+      "equivalent": true,
+      "p_lower": 9.84699074302415e-17,
+      "p_upper": 0.0005880283090481172,
+      "margin": 0.5625,
+      "sample_mean": 41.946400000000004,
+      "reference_mean": 41.7,
+      "variable": "hct"
+    },
+    {
+      "equivalent": true,
+      "p_lower": 1.347172169649596e-07,
+      "p_upper": 2.8881928393118645e-11,
+      "margin": 0.093,
+      "sample_mean": 6.868693333333334,
+      "reference_mean": 6.88,
+      "variable": "tp"
+    },
+    {
+      "equivalent": true,
+      "p_lower": 4.7552203417301e-13,
+      "p_upper": 2.858281531474737e-06,
+      "margin": 1.4549999999999998,
+      "sample_mean": 50.827666666666666,
+      "reference_mean": 50.5,
+      "variable": "hdl"
+    },
+    {
+      "equivalent": true,
+      "p_lower": 5.83199629791018e-18,
+      "p_upper": 0.0001804646885590719,
+      "margin": 4.2,
+      "sample_mean": 132.74606666666668,
+      "reference_mean": 131.0,
+      "variable": "ldl"
+    },
+    {
+      "equivalent": true,
+      "p_lower": 5.9385668104092494e-09,
+      "p_upper": 2.9160974605321304e-09,
+      "margin": 0.069,
+      "sample_mean": 5.8492733333333335,
+      "reference_mean": 5.85,
+      "variable": "wbv"
+    },
+    {
+      "equivalent": true,
+      "p_lower": 1.8508101982918154e-09,
+      "p_upper": 7.225725529441981e-09,
+      "margin": 19.5,
+      "sample_mean": 617.3905333333333,
+      "reference_mean": 617.0,
+      "variable": "tg0h"
+    },
+    {
+      "equivalent": true,
+      "p_lower": 8.017955608970041e-10,
+      "p_upper": 2.1605532625536604e-07,
+      "margin": 2.79,
+      "sample_mean": 52.448946666666664,
+      "reference_mean": 52.2,
+      "variable": "tcr"
+    }
+  ],
+  "summary": {
+    "total_checks": 13,
+    "passed": 13,
+    "failed": 0,
+    "all_passed": true
+  }
+}

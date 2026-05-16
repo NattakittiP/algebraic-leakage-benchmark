@@ -1,0 +1,483 @@
+{
+  "summary": [
+    {
+      "scenario": "clean_0pct",
+      "contam_rate": 0.0,
+      "outlier_types": "none",
+      "strategy": "no_cleaning",
+      "n_seeds": 15,
+      "AUROC_mean": 0.5096,
+      "AUROC_sd": 0.0179,
+      "AUROC_p2_5": 0.481,
+      "AUROC_p97_5": 0.5404,
+      "Brier_mean": 0.2511
+    },
+    {
+      "scenario": "clean_0pct",
+      "contam_rate": 0.0,
+      "outlier_types": "none",
+      "strategy": "global_cleaning",
+      "n_seeds": 15,
+      "AUROC_mean": 0.5096,
+      "AUROC_sd": 0.0179,
+      "AUROC_p2_5": 0.481,
+      "AUROC_p97_5": 0.5404,
+      "Brier_mean": 0.2511
+    },
+    {
+      "scenario": "clean_0pct",
+      "contam_rate": 0.0,
+      "outlier_types": "none",
+      "strategy": "fold_cleaning",
+      "n_seeds": 15,
+      "AUROC_mean": 0.5096,
+      "AUROC_sd": 0.0179,
+      "AUROC_p2_5": 0.481,
+      "AUROC_p97_5": 0.5404,
+      "Brier_mean": 0.2511
+    },
+    {
+      "scenario": "clean_0pct",
+      "contam_rate": 0.0,
+      "outlier_types": "none",
+      "strategy": "prespecified_clean",
+      "n_seeds": 15,
+      "AUROC_mean": 0.5096,
+      "AUROC_sd": 0.0179,
+      "AUROC_p2_5": 0.481,
+      "AUROC_p97_5": 0.5404,
+      "Brier_mean": 0.2511
+    },
+    {
+      "scenario": "neg_tg4h_1pct",
+      "contam_rate": 0.01,
+      "outlier_types": "neg_tg4h",
+      "strategy": "no_cleaning",
+      "n_seeds": 15,
+      "AUROC_mean": 0.5096,
+      "AUROC_sd": 0.0179,
+      "AUROC_p2_5": 0.481,
+      "AUROC_p97_5": 0.5404,
+      "Brier_mean": 0.2511
+    },
+    {
+      "scenario": "neg_tg4h_1pct",
+      "contam_rate": 0.01,
+      "outlier_types": "neg_tg4h",
+      "strategy": "global_cleaning",
+      "n_seeds": 15,
+      "AUROC_mean": 0.5096,
+      "AUROC_sd": 0.0179,
+      "AUROC_p2_5": 0.481,
+      "AUROC_p97_5": 0.5404,
+      "Brier_mean": 0.2511
+    },
+    {
+      "scenario": "neg_tg4h_1pct",
+      "contam_rate": 0.01,
+      "outlier_types": "neg_tg4h",
+      "strategy": "fold_cleaning",
+      "n_seeds": 15,
+      "AUROC_mean": 0.5096,
+      "AUROC_sd": 0.0179,
+      "AUROC_p2_5": 0.481,
+      "AUROC_p97_5": 0.5404,
+      "Brier_mean": 0.2511
+    },
+    {
+      "scenario": "neg_tg4h_1pct",
+      "contam_rate": 0.01,
+      "outlier_types": "neg_tg4h",
+      "strategy": "prespecified_clean",
+      "n_seeds": 15,
+      "AUROC_mean": 0.5096,
+      "AUROC_sd": 0.0179,
+      "AUROC_p2_5": 0.481,
+      "AUROC_p97_5": 0.5404,
+      "Brier_mean": 0.2511
+    },
+    {
+      "scenario": "neg_tg4h_5pct",
+      "contam_rate": 0.05,
+      "outlier_types": "neg_tg4h",
+      "strategy": "no_cleaning",
+      "n_seeds": 15,
+      "AUROC_mean": 0.5096,
+      "AUROC_sd": 0.0179,
+      "AUROC_p2_5": 0.481,
+      "AUROC_p97_5": 0.5404,
+      "Brier_mean": 0.2511
+    },
+    {
+      "scenario": "neg_tg4h_5pct",
+      "contam_rate": 0.05,
+      "outlier_types": "neg_tg4h",
+      "strategy": "global_cleaning",
+      "n_seeds": 15,
+      "AUROC_mean": 0.5096,
+      "AUROC_sd": 0.0179,
+      "AUROC_p2_5": 0.481,
+      "AUROC_p97_5": 0.5404,
+      "Brier_mean": 0.2511
+    },
+    {
+      "scenario": "neg_tg4h_5pct",
+      "contam_rate": 0.05,
+      "outlier_types": "neg_tg4h",
+      "strategy": "fold_cleaning",
+      "n_seeds": 15,
+      "AUROC_mean": 0.5096,
+      "AUROC_sd": 0.0179,
+      "AUROC_p2_5": 0.481,
+      "AUROC_p97_5": 0.5404,
+      "Brier_mean": 0.2511
+    },
+    {
+      "scenario": "neg_tg4h_5pct",
+      "contam_rate": 0.05,
+      "outlier_types": "neg_tg4h",
+      "strategy": "prespecified_clean",
+      "n_seeds": 15,
+      "AUROC_mean": 0.5096,
+      "AUROC_sd": 0.0179,
+      "AUROC_p2_5": 0.481,
+      "AUROC_p97_5": 0.5404,
+      "Brier_mean": 0.2511
+    },
+    {
+      "scenario": "ext_hct_1pct",
+      "contam_rate": 0.01,
+      "outlier_types": "extreme_hct",
+      "strategy": "no_cleaning",
+      "n_seeds": 15,
+      "AUROC_mean": 0.5094,
+      "AUROC_sd": 0.017,
+      "AUROC_p2_5": 0.4845,
+      "AUROC_p97_5": 0.5411,
+      "Brier_mean": 0.2511
+    },
+    {
+      "scenario": "ext_hct_1pct",
+      "contam_rate": 0.01,
+      "outlier_types": "extreme_hct",
+      "strategy": "global_cleaning",
+      "n_seeds": 15,
+      "AUROC_mean": 0.5094,
+      "AUROC_sd": 0.017,
+      "AUROC_p2_5": 0.4845,
+      "AUROC_p97_5": 0.5411,
+      "Brier_mean": 0.2511
+    },
+    {
+      "scenario": "ext_hct_1pct",
+      "contam_rate": 0.01,
+      "outlier_types": "extreme_hct",
+      "strategy": "fold_cleaning",
+      "n_seeds": 15,
+      "AUROC_mean": 0.5094,
+      "AUROC_sd": 0.017,
+      "AUROC_p2_5": 0.4845,
+      "AUROC_p97_5": 0.5411,
+      "Brier_mean": 0.2511
+    },
+    {
+      "scenario": "ext_hct_1pct",
+      "contam_rate": 0.01,
+      "outlier_types": "extreme_hct",
+      "strategy": "prespecified_clean",
+      "n_seeds": 15,
+      "AUROC_mean": 0.5094,
+      "AUROC_sd": 0.017,
+      "AUROC_p2_5": 0.4845,
+      "AUROC_p97_5": 0.5411,
+      "Brier_mean": 0.2511
+    },
+    {
+      "scenario": "ext_hct_5pct",
+      "contam_rate": 0.05,
+      "outlier_types": "extreme_hct",
+      "strategy": "no_cleaning",
+      "n_seeds": 15,
+      "AUROC_mean": 0.5088,
+      "AUROC_sd": 0.0191,
+      "AUROC_p2_5": 0.4809,
+      "AUROC_p97_5": 0.545,
+      "Brier_mean": 0.251
+    },
+    {
+      "scenario": "ext_hct_5pct",
+      "contam_rate": 0.05,
+      "outlier_types": "extreme_hct",
+      "strategy": "global_cleaning",
+      "n_seeds": 15,
+      "AUROC_mean": 0.5075,
+      "AUROC_sd": 0.0179,
+      "AUROC_p2_5": 0.4843,
+      "AUROC_p97_5": 0.542,
+      "Brier_mean": 0.2512
+    },
+    {
+      "scenario": "ext_hct_5pct",
+      "contam_rate": 0.05,
+      "outlier_types": "extreme_hct",
+      "strategy": "fold_cleaning",
+      "n_seeds": 15,
+      "AUROC_mean": 0.5075,
+      "AUROC_sd": 0.0179,
+      "AUROC_p2_5": 0.4843,
+      "AUROC_p97_5": 0.542,
+      "Brier_mean": 0.2512
+    },
+    {
+      "scenario": "ext_hct_5pct",
+      "contam_rate": 0.05,
+      "outlier_types": "extreme_hct",
+      "strategy": "prespecified_clean",
+      "n_seeds": 15,
+      "AUROC_mean": 0.5075,
+      "AUROC_sd": 0.0179,
+      "AUROC_p2_5": 0.4843,
+      "AUROC_p97_5": 0.542,
+      "Brier_mean": 0.2512
+    },
+    {
+      "scenario": "ext_tp_1pct",
+      "contam_rate": 0.01,
+      "outlier_types": "extreme_tp",
+      "strategy": "no_cleaning",
+      "n_seeds": 15,
+      "AUROC_mean": 0.5095,
+      "AUROC_sd": 0.0166,
+      "AUROC_p2_5": 0.4835,
+      "AUROC_p97_5": 0.5381,
+      "Brier_mean": 0.2512
+    },
+    {
+      "scenario": "ext_tp_1pct",
+      "contam_rate": 0.01,
+      "outlier_types": "extreme_tp",
+      "strategy": "global_cleaning",
+      "n_seeds": 15,
+      "AUROC_mean": 0.5095,
+      "AUROC_sd": 0.0166,
+      "AUROC_p2_5": 0.4835,
+      "AUROC_p97_5": 0.5381,
+      "Brier_mean": 0.2512
+    },
+    {
+      "scenario": "ext_tp_1pct",
+      "contam_rate": 0.01,
+      "outlier_types": "extreme_tp",
+      "strategy": "fold_cleaning",
+      "n_seeds": 15,
+      "AUROC_mean": 0.5095,
+      "AUROC_sd": 0.0166,
+      "AUROC_p2_5": 0.4835,
+      "AUROC_p97_5": 0.5381,
+      "Brier_mean": 0.2512
+    },
+    {
+      "scenario": "ext_tp_1pct",
+      "contam_rate": 0.01,
+      "outlier_types": "extreme_tp",
+      "strategy": "prespecified_clean",
+      "n_seeds": 15,
+      "AUROC_mean": 0.5095,
+      "AUROC_sd": 0.0166,
+      "AUROC_p2_5": 0.4835,
+      "AUROC_p97_5": 0.5381,
+      "Brier_mean": 0.2512
+    },
+    {
+      "scenario": "mixed_1pct",
+      "contam_rate": 0.01,
+      "outlier_types": "neg_tg4h+extreme_hct+extreme_tp",
+      "strategy": "no_cleaning",
+      "n_seeds": 15,
+      "AUROC_mean": 0.5071,
+      "AUROC_sd": 0.0184,
+      "AUROC_p2_5": 0.4784,
+      "AUROC_p97_5": 0.5386,
+      "Brier_mean": 0.2514
+    },
+    {
+      "scenario": "mixed_1pct",
+      "contam_rate": 0.01,
+      "outlier_types": "neg_tg4h+extreme_hct+extreme_tp",
+      "strategy": "global_cleaning",
+      "n_seeds": 15,
+      "AUROC_mean": 0.5071,
+      "AUROC_sd": 0.0184,
+      "AUROC_p2_5": 0.4784,
+      "AUROC_p97_5": 0.5386,
+      "Brier_mean": 0.2514
+    },
+    {
+      "scenario": "mixed_1pct",
+      "contam_rate": 0.01,
+      "outlier_types": "neg_tg4h+extreme_hct+extreme_tp",
+      "strategy": "fold_cleaning",
+      "n_seeds": 15,
+      "AUROC_mean": 0.5071,
+      "AUROC_sd": 0.0184,
+      "AUROC_p2_5": 0.4784,
+      "AUROC_p97_5": 0.5386,
+      "Brier_mean": 0.2514
+    },
+    {
+      "scenario": "mixed_1pct",
+      "contam_rate": 0.01,
+      "outlier_types": "neg_tg4h+extreme_hct+extreme_tp",
+      "strategy": "prespecified_clean",
+      "n_seeds": 15,
+      "AUROC_mean": 0.5071,
+      "AUROC_sd": 0.0184,
+      "AUROC_p2_5": 0.4784,
+      "AUROC_p97_5": 0.5386,
+      "Brier_mean": 0.2514
+    },
+    {
+      "scenario": "mixed_5pct",
+      "contam_rate": 0.05,
+      "outlier_types": "neg_tg4h+extreme_hct+extreme_tp",
+      "strategy": "no_cleaning",
+      "n_seeds": 15,
+      "AUROC_mean": 0.5109,
+      "AUROC_sd": 0.0188,
+      "AUROC_p2_5": 0.4828,
+      "AUROC_p97_5": 0.5414,
+      "Brier_mean": 0.251
+    },
+    {
+      "scenario": "mixed_5pct",
+      "contam_rate": 0.05,
+      "outlier_types": "neg_tg4h+extreme_hct+extreme_tp",
+      "strategy": "global_cleaning",
+      "n_seeds": 15,
+      "AUROC_mean": 0.5126,
+      "AUROC_sd": 0.0197,
+      "AUROC_p2_5": 0.484,
+      "AUROC_p97_5": 0.5454,
+      "Brier_mean": 0.2511
+    },
+    {
+      "scenario": "mixed_5pct",
+      "contam_rate": 0.05,
+      "outlier_types": "neg_tg4h+extreme_hct+extreme_tp",
+      "strategy": "fold_cleaning",
+      "n_seeds": 15,
+      "AUROC_mean": 0.5126,
+      "AUROC_sd": 0.0197,
+      "AUROC_p2_5": 0.484,
+      "AUROC_p97_5": 0.5454,
+      "Brier_mean": 0.2511
+    },
+    {
+      "scenario": "mixed_5pct",
+      "contam_rate": 0.05,
+      "outlier_types": "neg_tg4h+extreme_hct+extreme_tp",
+      "strategy": "prespecified_clean",
+      "n_seeds": 15,
+      "AUROC_mean": 0.5126,
+      "AUROC_sd": 0.0197,
+      "AUROC_p2_5": 0.484,
+      "AUROC_p97_5": 0.5454,
+      "Brier_mean": 0.2511
+    }
+  ],
+  "plausibility_bounds": {
+    "age": [
+      18.0,
+      90.0
+    ],
+    "bmi": [
+      14.0,
+      60.0
+    ],
+    "hct": [
+      20.0,
+      65.0
+    ],
+    "tp": [
+      4.0,
+      10.0
+    ],
+    "wbv": [
+      2.0,
+      10.0
+    ],
+    "hdl": [
+      10.0,
+      120.0
+    ],
+    "ldl": [
+      30.0,
+      300.0
+    ],
+    "tg0h": [
+      50.0,
+      3000.0
+    ],
+    "tg4h": [
+      0.0,
+      2000.0
+    ],
+    "tcr": [
+      -50.0,
+      100.0
+    ]
+  },
+  "scenarios": {
+    "clean_0pct": {
+      "rate": 0.0,
+      "types": []
+    },
+    "neg_tg4h_1pct": {
+      "rate": 0.01,
+      "types": [
+        "neg_tg4h"
+      ]
+    },
+    "neg_tg4h_5pct": {
+      "rate": 0.05,
+      "types": [
+        "neg_tg4h"
+      ]
+    },
+    "ext_hct_1pct": {
+      "rate": 0.01,
+      "types": [
+        "extreme_hct"
+      ]
+    },
+    "ext_hct_5pct": {
+      "rate": 0.05,
+      "types": [
+        "extreme_hct"
+      ]
+    },
+    "ext_tp_1pct": {
+      "rate": 0.01,
+      "types": [
+        "extreme_tp"
+      ]
+    },
+    "mixed_1pct": {
+      "rate": 0.01,
+      "types": [
+        "neg_tg4h",
+        "extreme_hct",
+        "extreme_tp"
+      ]
+    },
+    "mixed_5pct": {
+      "rate": 0.05,
+      "types": [
+        "neg_tg4h",
+        "extreme_hct",
+        "extreme_tp"
+      ]
+    }
+  },
+  "n_seeds": 15
+}

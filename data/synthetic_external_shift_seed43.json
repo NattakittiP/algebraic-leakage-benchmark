@@ -1,0 +1,116 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-05-13T11:22:40.045903Z",
+  "out_file": "synthetic_external_shift_seed43.csv",
+  "seed": 43,
+  "n": 500,
+  "scenario": "null",
+  "generator_version": "1.0",
+  "wbv_formula": "WBV = 0.12 * Hct + 0.17 * (TP - 2.07)",
+  "tg4h_formula": "TG4h = TG0h * (1 - TCR/100)",
+  "note_label": "low_TCR label is NOT in this file. Compute it inside each fold from Q1 of that fold's TCR.",
+  "columns": [
+    "record_id",
+    "age",
+    "sex",
+    "bmi",
+    "hct",
+    "tp",
+    "hdl",
+    "ldl",
+    "wbv",
+    "tg0h",
+    "tcr",
+    "tg4h"
+  ],
+  "summary_stats": {
+    "age": {
+      "name": "age",
+      "n": 500,
+      "mean": 52.7406,
+      "sd": 9.512677525671457,
+      "min": 25.3,
+      "q1": 46.175000000000004,
+      "median": 53.3,
+      "q3": 59.4,
+      "max": 74.4
+    },
+    "bmi": {
+      "name": "bmi",
+      "n": 500,
+      "mean": 24.099,
+      "sd": 2.8582158413232515,
+      "min": 16.1,
+      "q1": 22.1,
+      "median": 24.1,
+      "q3": 26.1,
+      "max": 32.1
+    },
+    "hct": {
+      "name": "hct",
+      "n": 500,
+      "mean": 41.4246,
+      "sd": 3.845114387023954,
+      "min": 31.8,
+      "q1": 38.7,
+      "median": 41.25,
+      "q3": 44.2,
+      "max": 53.1
+    },
+    "tp": {
+      "name": "tp",
+      "n": 500,
+      "mean": 6.88328,
+      "sd": 0.5978431855838939,
+      "min": 5.33,
+      "q1": 6.48,
+      "median": 6.9,
+      "q3": 7.28,
+      "max": 8.6
+    },
+    "wbv": {
+      "name": "wbv",
+      "n": 500,
+      "mean": 5.789256,
+      "sd": 0.4741254014040094,
+      "min": 4.534,
+      "q1": 5.49025,
+      "median": 5.7885,
+      "q3": 6.1075,
+      "max": 7.399
+    },
+    "tg0h": {
+      "name": "tg0h",
+      "n": 500,
+      "mean": 619.9744000000001,
+      "sd": 131.2627748325987,
+      "min": 416.9,
+      "q1": 531.875,
+      "median": 594.0,
+      "q3": 676.975,
+      "max": 1279.4
+    },
+    "tcr": {
+      "name": "tcr",
+      "n": 500,
+      "mean": 52.632180000000005,
+      "sd": 19.313128376909994,
+      "min": 2.4,
+      "q1": 39.195,
+      "median": 52.475,
+      "q3": 66.56,
+      "max": 96.76
+    },
+    "tg4h": {
+      "name": "tg4h",
+      "n": 500,
+      "mean": 292.8494,
+      "sd": 134.57737566069358,
+      "min": 14.3,
+      "q1": 200.6,
+      "median": 274.29999999999995,
+      "q3": 380.07500000000005,
+      "max": 1039.5
+    }
+  }
+}

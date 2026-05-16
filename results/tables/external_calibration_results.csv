@@ -1,0 +1,9 @@
+cohort,pipeline,model,n_total,n_positive,prevalence,brier,ece,cal_slope,cal_intercept
+eicu_24h,clean,RandomForest,193153,5488,0.02841,0.0274,0.0415,0.9951,-1.2679
+eicu_24h,clean,LogisticRegression,193153,5488,0.02841,0.1491,0.2966,0.9144,-3.5003
+eicu_24h,leaky_definitional,RandomForest,193153,5488,0.02841,0.0007,0.0089,3.6143,1.0081
+eicu_24h,leaky_definitional,LogisticRegression,193153,5488,0.02841,0.0034,0.0047,4.6268,-12.5693
+mimic,clean,RandomForest,14081,358,0.02542,0.0186,0.0255,1.5048,-0.2101
+mimic,clean,LogisticRegression,14081,358,0.02542,0.1014,0.1955,0.7993,-3.5304
+mimic,leaky_discharge_location,RandomForest,14081,358,0.02542,0.0051,0.0198,3.1312,0.1294
+mimic,leaky_discharge_location,LogisticRegression,14081,358,0.02542,0.0377,0.0599,0.5449,-3.0787

@@ -1,0 +1,13 @@
+scenario,mechanism,target_rate,actual_miss_rate,strategy,n_seeds,AUROC_mean,AUROC_sd,AUROC_p2_5,AUROC_p97_5,Brier_mean
+complete,none,0.0,0.0,fold_impute,20,0.5089,0.0174,0.4823,0.5395,0.2512
+complete,none,0.0,0.0,global_impute,20,0.5089,0.0174,0.4823,0.5395,0.2512
+MCAR_5pct,MCAR,0.05,0.05,fold_impute,20,0.5085,0.0173,0.4819,0.5397,0.2513
+MCAR_5pct,MCAR,0.05,0.05,global_impute,20,0.5083,0.0174,0.4819,0.5395,0.2513
+MCAR_10pct,MCAR,0.1,0.1,fold_impute,20,0.5062,0.0185,0.4751,0.5406,0.2516
+MCAR_10pct,MCAR,0.1,0.1,global_impute,20,0.5059,0.0187,0.4751,0.5409,0.2516
+MCAR_20pct,MCAR,0.2,0.2,fold_impute,20,0.5036,0.0188,0.4732,0.5326,0.2516
+MCAR_20pct,MCAR,0.2,0.2,global_impute,20,0.5036,0.0187,0.4732,0.5326,0.2516
+MAR_bmi,MAR,0.1,0.0831,fold_impute,20,0.5093,0.0168,0.4864,0.5432,0.2513
+MAR_bmi,MAR,0.1,0.0831,global_impute,20,0.5091,0.0171,0.4863,0.5433,0.2514
+MAR_tg0h,MAR,0.1,0.1009,fold_impute,20,0.5133,0.0159,0.4841,0.5367,0.251
+MAR_tg0h,MAR,0.1,0.1009,global_impute,20,0.5131,0.016,0.4842,0.5368,0.2511

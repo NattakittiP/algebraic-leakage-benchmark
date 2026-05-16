@@ -1,0 +1,199 @@
+{
+  "summary": [
+    {
+      "scenario": "complete",
+      "mechanism": "none",
+      "target_rate": 0.0,
+      "actual_miss_rate": 0.0,
+      "strategy": "fold_impute",
+      "n_seeds": 20,
+      "AUROC_mean": 0.5089,
+      "AUROC_sd": 0.0174,
+      "AUROC_p2_5": 0.4823,
+      "AUROC_p97_5": 0.5395,
+      "Brier_mean": 0.2512
+    },
+    {
+      "scenario": "complete",
+      "mechanism": "none",
+      "target_rate": 0.0,
+      "actual_miss_rate": 0.0,
+      "strategy": "global_impute",
+      "n_seeds": 20,
+      "AUROC_mean": 0.5089,
+      "AUROC_sd": 0.0174,
+      "AUROC_p2_5": 0.4823,
+      "AUROC_p97_5": 0.5395,
+      "Brier_mean": 0.2512
+    },
+    {
+      "scenario": "MCAR_5pct",
+      "mechanism": "MCAR",
+      "target_rate": 0.05,
+      "actual_miss_rate": 0.05,
+      "strategy": "fold_impute",
+      "n_seeds": 20,
+      "AUROC_mean": 0.5085,
+      "AUROC_sd": 0.0173,
+      "AUROC_p2_5": 0.4819,
+      "AUROC_p97_5": 0.5397,
+      "Brier_mean": 0.2513
+    },
+    {
+      "scenario": "MCAR_5pct",
+      "mechanism": "MCAR",
+      "target_rate": 0.05,
+      "actual_miss_rate": 0.05,
+      "strategy": "global_impute",
+      "n_seeds": 20,
+      "AUROC_mean": 0.5083,
+      "AUROC_sd": 0.0174,
+      "AUROC_p2_5": 0.4819,
+      "AUROC_p97_5": 0.5395,
+      "Brier_mean": 0.2513
+    },
+    {
+      "scenario": "MCAR_10pct",
+      "mechanism": "MCAR",
+      "target_rate": 0.1,
+      "actual_miss_rate": 0.1,
+      "strategy": "fold_impute",
+      "n_seeds": 20,
+      "AUROC_mean": 0.5062,
+      "AUROC_sd": 0.0185,
+      "AUROC_p2_5": 0.4751,
+      "AUROC_p97_5": 0.5406,
+      "Brier_mean": 0.2516
+    },
+    {
+      "scenario": "MCAR_10pct",
+      "mechanism": "MCAR",
+      "target_rate": 0.1,
+      "actual_miss_rate": 0.1,
+      "strategy": "global_impute",
+      "n_seeds": 20,
+      "AUROC_mean": 0.5059,
+      "AUROC_sd": 0.0187,
+      "AUROC_p2_5": 0.4751,
+      "AUROC_p97_5": 0.5409,
+      "Brier_mean": 0.2516
+    },
+    {
+      "scenario": "MCAR_20pct",
+      "mechanism": "MCAR",
+      "target_rate": 0.2,
+      "actual_miss_rate": 0.2,
+      "strategy": "fold_impute",
+      "n_seeds": 20,
+      "AUROC_mean": 0.5036,
+      "AUROC_sd": 0.0188,
+      "AUROC_p2_5": 0.4732,
+      "AUROC_p97_5": 0.5326,
+      "Brier_mean": 0.2516
+    },
+    {
+      "scenario": "MCAR_20pct",
+      "mechanism": "MCAR",
+      "target_rate": 0.2,
+      "actual_miss_rate": 0.2,
+      "strategy": "global_impute",
+      "n_seeds": 20,
+      "AUROC_mean": 0.5036,
+      "AUROC_sd": 0.0187,
+      "AUROC_p2_5": 0.4732,
+      "AUROC_p97_5": 0.5326,
+      "Brier_mean": 0.2516
+    },
+    {
+      "scenario": "MAR_bmi",
+      "mechanism": "MAR",
+      "target_rate": 0.1,
+      "actual_miss_rate": 0.0831,
+      "strategy": "fold_impute",
+      "n_seeds": 20,
+      "AUROC_mean": 0.5093,
+      "AUROC_sd": 0.0168,
+      "AUROC_p2_5": 0.4864,
+      "AUROC_p97_5": 0.5432,
+      "Brier_mean": 0.2513
+    },
+    {
+      "scenario": "MAR_bmi",
+      "mechanism": "MAR",
+      "target_rate": 0.1,
+      "actual_miss_rate": 0.0831,
+      "strategy": "global_impute",
+      "n_seeds": 20,
+      "AUROC_mean": 0.5091,
+      "AUROC_sd": 0.0171,
+      "AUROC_p2_5": 0.4863,
+      "AUROC_p97_5": 0.5433,
+      "Brier_mean": 0.2514
+    },
+    {
+      "scenario": "MAR_tg0h",
+      "mechanism": "MAR",
+      "target_rate": 0.1,
+      "actual_miss_rate": 0.1009,
+      "strategy": "fold_impute",
+      "n_seeds": 20,
+      "AUROC_mean": 0.5133,
+      "AUROC_sd": 0.0159,
+      "AUROC_p2_5": 0.4841,
+      "AUROC_p97_5": 0.5367,
+      "Brier_mean": 0.251
+    },
+    {
+      "scenario": "MAR_tg0h",
+      "mechanism": "MAR",
+      "target_rate": 0.1,
+      "actual_miss_rate": 0.1009,
+      "strategy": "global_impute",
+      "n_seeds": 20,
+      "AUROC_mean": 0.5131,
+      "AUROC_sd": 0.016,
+      "AUROC_p2_5": 0.4842,
+      "AUROC_p97_5": 0.5368,
+      "Brier_mean": 0.2511
+    }
+  ],
+  "scenarios": {
+    "complete": {
+      "mechanism": "none",
+      "rate": 0.0,
+      "depends_on": null
+    },
+    "MCAR_5pct": {
+      "mechanism": "MCAR",
+      "rate": 0.05,
+      "depends_on": null
+    },
+    "MCAR_10pct": {
+      "mechanism": "MCAR",
+      "rate": 0.1,
+      "depends_on": null
+    },
+    "MCAR_20pct": {
+      "mechanism": "MCAR",
+      "rate": 0.2,
+      "depends_on": null
+    },
+    "MAR_bmi": {
+      "mechanism": "MAR",
+      "rate": 0.1,
+      "depends_on": "bmi"
+    },
+    "MAR_tg0h": {
+      "mechanism": "MAR",
+      "rate": 0.1,
+      "depends_on": "tg0h"
+    }
+  },
+  "missing_features": [
+    "hct",
+    "tp",
+    "hdl",
+    "ldl"
+  ],
+  "n_seeds": 20
+}
