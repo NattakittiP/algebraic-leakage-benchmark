@@ -1,0 +1,14 @@
+pipeline,model,AUROC_mean,AUROC_sd,PR_AUC_mean,PR_AUC_sd,DELTA_AUC,n_seeds,cohort,label,label_tag,n_total,n_positive,prevalence,oracle_agreement,note
+clean,LogisticRegression,0.8444,0.0002,0.3468,0.0005,0.0,30,eICU,label48h,48h,193153,8388,0.0434,,
+clean,RandomForest,0.8956,0.0003,0.4176,0.0011,0.0,30,eICU,label48h,48h,193153,8388,0.0434,,
+clean,SVM,0.8441,0.0002,0.3452,0.0005,0.0,30,eICU,label48h,48h,193153,8388,0.0434,,
+clean,XGBoost,0.8782,0.0005,0.4103,0.001,0.0,30,eICU,label48h,48h,193153,8388,0.0434,,
+leaky_definitional,LogisticRegression,1.0,0.0,0.9999,0.0,0.1556,30,eICU,label48h,48h,193153,8388,0.0434,,
+leaky_definitional,RandomForest,1.0,0.0,1.0,0.0,0.1044,30,eICU,label48h,48h,193153,8388,0.0434,,
+leaky_definitional,SVM,1.0,0.0,1.0,0.0,0.1559,30,eICU,label48h,48h,193153,8388,0.0434,,
+leaky_definitional,XGBoost,1.0,0.0,1.0,0.0,0.1218,30,eICU,label48h,48h,193153,8388,0.0434,,
+leaky_discharge_location,LogisticRegression,0.9893,0.0,0.7585,0.0004,0.1449,30,eICU,label48h,48h,193153,8388,0.0434,,
+leaky_discharge_location,RandomForest,0.9896,0.0,0.7818,0.001,0.094,30,eICU,label48h,48h,193153,8388,0.0434,,
+leaky_discharge_location,SVM,0.9891,0.0,0.7541,0.0005,0.145,30,eICU,label48h,48h,193153,8388,0.0434,,
+leaky_discharge_location,XGBoost,0.9913,0.0,0.8223,0.0008,0.1131,30,eICU,label48h,48h,193153,8388,0.0434,,
+oracle,OracleRule,1.0,0.0,1.0,0.0,0.1344,1,eICU,label48h,48h,193153,8388,0.0434,1.0,Deterministic rule: Expired AND offset_num <= 2880
