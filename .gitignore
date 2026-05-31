@@ -1,0 +1,41 @@
+# =============================================================================
+# .gitignore — TCR Leakage Benchmark
+# =============================================================================
+
+# ── Generated data (recreate with: bash run_all.sh) ──────────────────────────
+data/*.csv
+data/*.json
+!data/.gitkeep
+
+# ── Generated results (tables and figures) ───────────────────────────────────
+results/tables/*.csv
+results/tables/*.json
+!results/tables/.gitkeep
+results/figures/*.png
+results/figures/*.pdf
+!results/figures/.gitkeep
+
+# ── External patient data — NEVER commit (data use agreements) ───────────────
+External Cohort/Dataset/
+External Cohort/Result_External Cohort/
+CGMacros_dateshifted365/
+curated-data-for-describing-blood-glucose-management-in-the-intensive-care-unit-1.0.1/
+
+# ── Working / manuscript documents ───────────────────────────────────────────
+Paper Writing/
+Systematic Survey/
+POLRC_Systematic_Audit*.docx
+
+# ── Python cache ──────────────────────────────────────────────────────────────
+__pycache__/
+*.pyc
+*.pyo
+src/results_icu_audit/
+.pytest_cache/
+
+# ── IDE / OS ──────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+*.egg-info/
+.venv/
+venv/

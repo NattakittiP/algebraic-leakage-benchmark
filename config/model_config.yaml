@@ -1,0 +1,56 @@
+# model_config.yaml
+# Model hyperparameters and pipeline settings for the clean and leaky pipelines.
+
+# --- Cross-validation ---
+cv:
+  outer_folds: 5    # outer CV for performance estimation
+  inner_folds: 5    # inner CV for hyperparameter tuning (reserved for future use)
+  shuffle: true
+  random_state: 42
+
+# --- Label threshold ---
+label_threshold_percentile: 25.0   # Q1 of TCR in training fold → low_TCR = 1
+
+# --- Winsorizer (fold-sealed) ---
+winsorizer:
+  lower_pct: 1.0
+  upper_pct: 99.0
+
+# --- SMOTE (applied inside fold only) ---
+smote:
+  enabled: true
+  k_neighbors: 5
+  random_state: 42
+
+# --- Model hyperparameters ---
+models:
+
+  logistic_regression:
+    C: 1.0
+    max_iter: 1000
+    solver: lbfgs
+    penalty: l2
+
+  random_forest:
+    n_estimators: 200
+    max_depth: null        # unlimited — prevents underfitting
+    min_samples_leaf: 5
+    n_jobs: -1
+
+  svm:
+    C: 1.0
+    kernel: rbf
+    probability: true
+
+  xgboost:
+    n_estimators: 200
+    max_depth: 4
+    learning_rate: 0.05
+    subsample: 0.8
+    colsample_bytree: 0.8
+    eval_metric: logloss
+
+# --- SHAP analysis ---
+shap:
+  sample_size: 300    # max rows for SHAP computation (speed)
+  enabled: true

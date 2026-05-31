@@ -1,0 +1,92 @@
+name: CI — Smoke Test and Leakage Verification
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10"]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Cache pip dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run unit tests
+        run: pytest tests/ -v --tb=short --cov=src --cov-report=term-missing
+
+      - name: Smoke test — generate null dataset
+        run: |
+          python src/generate_synthetic_data.py \
+            --config config/generator_null.yaml \
+            --seed 42 --n 300 \
+            --out data/smoke_test.csv
+
+      - name: Smoke test — validate dataset
+        run: |
+          python src/validate_synthetic_data.py \
+            --data data/smoke_test.csv \
+            --scenario null \
+            --out results/tables/smoke_validation.json
+
+      - name: Smoke test — clean pipeline (n=300)
+        run: |
+          python src/run_clean_pipeline.py \
+            --data data/smoke_test.csv \
+            --config config/model_config.yaml \
+            --out results/tables/smoke_clean.csv \
+            --seed 42
+
+      - name: Verify clean AUC is not inflated
+        run: |
+          python - <<'EOF'
+          import pandas as pd, sys
+          df = pd.read_csv("results/tables/smoke_clean.csv")
+          for _, row in df.iterrows():
+              auc = row["AUROC_mean"]
+              if auc is None or pd.isna(auc):
+                  continue
+              if auc > 0.70:
+                  print(f"FAIL: {row['model']} clean AUC {auc:.4f} > 0.70 (possible leakage!)")
+                  sys.exit(1)
+              print(f"OK: {row['model']} AUC={auc:.4f}")
+          print("All clean AUCs within acceptable range.")
+          EOF
+
+      - name: Verify no TG4h in clean features
+        run: |
+          python -c "
+          from src.run_clean_pipeline import CLEAN_FEATURES
+          assert 'tg4h' not in CLEAN_FEATURES, 'CRITICAL: tg4h in CLEAN_FEATURES!'
+          assert 'tcr'  not in CLEAN_FEATURES, 'CRITICAL: tcr in CLEAN_FEATURES!'
+          print('Feature set verified: no leakage variables in clean pipeline.')
+          "
+
+      - name: Generate Figure 1 (DAG)
+        run: |
+          mkdir -p results/figures
+          python src/plotting.py \
+            --datadir data/ \
+            --resultsdir results/tables/ \
+            --figdir results/figures/

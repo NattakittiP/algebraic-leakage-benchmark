@@ -1,0 +1,59 @@
+cff-version: 1.2.0
+message: "If you use this benchmark, please cite it as below."
+type: software
+
+title: "Algebraic Definitional Leakage in Paired Biomedical Prediction Models and a Reproducible Audit Framework"
+version: "1.0.0"
+date-released: "2026-05-31"
+
+abstract: >
+  A fully reproducible benchmark for algebraic definitional leakage in paired
+  biomedical prediction models. Provides a synthetic paired-outcome generator,
+  an 8-type leakage taxonomy with quantified AUROC inflation, a cross-classifier
+  SHAP attribution distortion analysis, and the Paired Outcome Leakage Reporting
+  Checklist (POLRC) validated against 15 published paired-biomarker studies
+  across four real-world clinical cohorts (CGMacros, ICU Glucose, eICU, MIMIC-IV).
+
+authors:
+  - family-names: Piyavechvirat
+    given-names: Nattakitti
+    email: ohm19nattakitti@gmail.com
+    affiliation: "International Bachelor Program in Informatics, Yuan Ze University, Taiwan"
+
+  - family-names: Phomak
+    given-names: Chayada
+    affiliation: "International Bachelor Program in Informatics, Yuan Ze University, Taiwan"
+
+  - family-names: Budiyanto
+    given-names: Filippo Jason
+    affiliation: "International Bachelor Program in Informatics, Yuan Ze University, Taiwan"
+
+  - family-names: "ul Haq"
+    given-names: Naeem
+    affiliation: "Bacha Khan Medical College, Mardan Medical Complex, Pakistan"
+
+  - family-names: "ul Haq"
+    given-names: "Qazi Mazhar"
+    affiliation: "Department of Computer Science and Engineering, Yuan Ze University, Taiwan"
+
+  - family-names: Huang
+    given-names: "Yi-Jheng"
+    email: yjhuang@saturn.yzu.edu.tw
+    affiliation: "Department of Computer Science and Engineering, Yuan Ze University, Taiwan"
+
+license: MIT
+
+repository-code: "https://github.com/NattakittiP/algebraic-leakage-benchmark"
+
+keywords:
+  - algebraic definitional leakage
+  - data leakage
+  - paired biomedical outcomes
+  - machine learning benchmark
+  - reproducible research
+  - AUROC inflation
+  - SHAP attribution distortion
+  - triglyceride clearance rate
+  - whole blood viscosity
+  - POLRC checklist
+  - clinical AI safety

@@ -1,0 +1,127 @@
+=====================================================
+  TCR Leakage Benchmark — Quick Reference
+=====================================================
+
+SETUP
+-----
+cd "C:\Users\Sabi\Desktop\New Project"
+
+Option A — Conda (recommended):
+  conda env create -f environment.yml
+  conda activate tcr-benchmark
+
+Option B — pip:
+  pip install -r requirements.txt
+
+=====================================================
+ONE-COMMAND REPRODUCTION (recommended)
+=====================================================
+
+Full pipeline (~90–180 min):
+  bash run_all.sh
+
+Quick smoke test (~5–10 min, n=300, 5 seeds):
+  bash run_all.sh --quick
+
+=====================================================
+INDIVIDUAL STEPS (for partial re-runs)
+=====================================================
+
+Step 1 — Generate synthetic datasets
+  python src/generate_synthetic_data.py --config config/generator_null.yaml --seed 2026 --n 1500 --out data/paired_tcr_null_v1_seed2026.csv
+  python src/generate_synthetic_data.py --config config/generator_weak_signal.yaml --seed 2026 --n 1500 --out data/paired_tcr_weak_signal_v1_seed2026.csv
+  python src/generate_synthetic_data.py --config config/generator_moderate_signal.yaml --seed 2026 --n 1500 --out data/paired_tcr_moderate_signal_v1_seed2026.csv
+  python src/generate_synthetic_data.py --config config/generator_wbv_positive.yaml --seed 2026 --n 1500 --out data/paired_tcr_wbv_positive_v1_seed2026.csv
+
+Step 2 — Validate data
+  python src/validate_synthetic_data.py --data data/paired_tcr_null_v1_seed2026.csv --scenario null --out results/tables/validation_null.json --figdir results/figures
+
+Step 3 — Clean pipeline (honest baseline)
+  python src/run_clean_pipeline.py --data data/paired_tcr_null_v1_seed2026.csv --config config/model_config.yaml --out results/tables/clean_results.csv --seed 2026
+
+Step 4 — Leakage benchmark (all 8 types)
+  python src/run_leakage_scenarios.py --data data/paired_tcr_null_v1_seed2026.csv --config config/model_config.yaml --out results/tables/leakage_benchmark.csv --seed 2026
+
+Step 5 — Unified SHAP / ADI analysis
+  python src/run_unified_shap.py --data data/paired_tcr_null_v1_seed2026.csv --config config/model_config.yaml --out_dir results/tables --figdir results/figures --seed 2026 --sample_size 500
+
+Step 6 — Cross-classifier SHAP
+  python src/run_cross_classifier_shap.py --data data/paired_tcr_null_v1_seed2026.csv --config config/model_config.yaml --out results/tables/cross_classifier_shap.csv --figdir results/figures --seed 2026
+
+Step 7 — Bootstrap ADI (500 resamples)
+  python src/run_bootstrap_adi.py --data data/paired_tcr_null_v1_seed2026.csv --config config/model_config.yaml --out results/tables/bootstrap_adi.csv --figdir results/figures --n_boot 500 --seed 2026
+
+Step 8 — Alternate-formula benchmark (ATC)
+  python src/run_alternate_formula.py --data data/paired_tcr_null_v1_seed2026.csv --config config/model_config.yaml --out results/tables/alternate_formula_benchmark.csv --seeds 30
+
+Step 9 — Ratio-formula benchmark
+  python src/run_ratio_formula.py --data data/paired_tcr_null_v1_seed2026.csv --out results/tables/ratio_formula_benchmark.csv --seeds 30
+
+Step 10 — Scenario sensitivity (S1, 100 seeds)
+  python src/run_scenario_sensitivity.py --configdir config/ --model_config config/model_config.yaml --out results/tables/scenario_sensitivity.csv --seeds 100 --n 1500
+
+Step 11 — Sample-size sensitivity (S2)
+  python src/run_sample_size_sensitivity.py --configdir config/ --model_config config/model_config.yaml --out results/tables/sample_size_sensitivity.csv --figdir results/figures --seeds 30 --n_jobs -1
+
+Step 12 — Noise sensitivity (S3)
+  python src/run_noise_sensitivity.py --config config/generator_null.yaml --model_config config/model_config.yaml --out results/tables/noise_sensitivity.csv --figdir results/figures --n 1500 --seeds 20
+
+Step 13 — Missingness sensitivity (S4)
+  python src/run_missingness_sensitivity.py --config config/generator_null.yaml --model_config config/model_config.yaml --out results/tables/missingness_sensitivity.csv --figdir results/figures --n 1500 --seeds 20
+
+Step 14 — Outlier stress test (S5)
+  python src/run_outlier_stress_test.py --config config/generator_null.yaml --model_config config/model_config.yaml --out results/tables/outlier_stress_test.csv --figdir results/figures --n 1500 --seeds 15
+
+Step 15 — Domain-shift stress test
+  python src/run_domain_shift.py --train data/paired_tcr_null_v1_seed2026.csv --shift_config config/generator_null.yaml --shift_seed 2027 --config config/model_config.yaml --out results/tables/domain_shift.csv --figdir results/figures
+
+Step 16 — Domain-shift WBV comparison
+  python src/run_domain_shift_wbv.py --null_data data/paired_tcr_null_v1_seed2026.csv --wbv_data data/paired_tcr_wbv_positive_v1_seed2026.csv --null_config config/generator_null.yaml --wbv_config config/generator_wbv_positive.yaml --model_config config/model_config.yaml --shift_seed 2027 --out results/tables/domain_shift_wbv_comparison.csv --figdir results/figures
+
+Step 17 — Domain-shift multiseed (10 seeds)
+  python src/run_domain_shift_multiseed.py --null_data data/paired_tcr_null_v1_seed2026.csv --wbv_data data/paired_tcr_wbv_positive_v1_seed2026.csv --null_config config/generator_null.yaml --wbv_config config/generator_wbv_positive.yaml --model_config config/model_config.yaml --shift_seed 2027 --n_seeds 10 --out_dir results/tables --figdir results/figures
+
+Step 18 — Build CGMacros cohort
+  python src/build_cgmacros_cohort.py --data_dir "CGMacros_dateshifted365/CGMacros_Dataset" --outdir results/tables
+
+Step 19 — CGMacros leakage audit
+  python src/run_external_cgmacros.py --data results/tables/cgmacros_meal_cohort.csv --outdir results/tables --figdir results/figures --n_seeds 30 --n_folds 5
+
+Step 20 — CGMacros SHAP
+  python src/run_cgmacros_shap.py --data results/tables/cgmacros_meal_cohort.csv --outdir results/tables --figdir results/figures --seed 42
+
+Step 21 — CGMacros subject uncertainty (LOSO + bootstrap)
+  python src/run_cgmacros_subject_uncertainty.py --data results/tables/cgmacros_meal_cohort.csv --outdir results/tables --figdir results/figures --n_bootstrap 500 --seed 42
+
+Step 22 — ICU Glucose leakage audit
+  python src/icu_glucose_leakage_audit.py --data_path "curated-data-for-describing-blood-glucose-management-in-the-intensive-care-unit-1.0.1/Datasets/glucose_insulin_pair.csv" --output_dir results/tables
+
+Step 23 — eICU leakage audit
+  python src/run_external_eicu.py --data24 "External Cohort/Dataset/eicu_label24h.csv" --data48 "External Cohort/Dataset/eicu_label48h.csv" --outdir results/tables --figdir results/figures --n_seeds 30 --n_folds 5
+
+Step 24 — MIMIC-IV leakage audit
+  python src/run_external_mimic.py --data "External Cohort/Dataset/full_analytic_dataset_mortality_all_admissions.csv" --outdir results/tables --figdir results/figures --n_seeds 30 --n_folds 5
+
+Step 25 — External calibration (eICU + MIMIC)
+  python src/run_external_calibration.py --eicu24 "External Cohort/Dataset/eicu_label24h.csv" --mimic "External Cohort/Dataset/full_analytic_dataset_mortality_all_admissions.csv" --outdir results/tables --figdir results/figures --seed 42 --n_folds 5
+
+Step 26 — External SHAP (eICU)
+  python src/run_external_shap.py --eicu24 "External Cohort/Dataset/eicu_label24h.csv" --outdir results/tables --figdir results/figures --seed 42
+
+Step 27 — Decision Curve Analysis
+  python src/run_dca.py --data24 "External Cohort/Dataset/eicu_label24h.csv" --outdir results/tables --figdir results/figures --n_folds 5 --seed 42
+
+Step 28 — Combined external-cohort figures
+  python src/plot_external_cohort.py --eicu24 results/tables/external_eicu_24h_results.csv --eicu48 results/tables/external_eicu_48h_results.csv --mimic results/tables/external_mimic_results.csv --figdir results/figures
+
+Step 29 — All manuscript figures
+  python src/plotting.py --datadir data/ --resultsdir results/tables/ --figdir results/figures/
+
+=====================================================
+UNIT TESTS
+=====================================================
+  pytest tests/ -v --tb=short
+
+=====================================================
+NOTE: For a full one-command run, use bash run_all.sh
+=====================================================
