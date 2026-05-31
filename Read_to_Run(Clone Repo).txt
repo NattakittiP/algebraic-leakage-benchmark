@@ -1,0 +1,10 @@
+Step 1:
+git clone https://github.com/NattakittiP/algebraic-leakage-benchmark.git
+cd algebraic-leakage-benchmark
+
+Step 2:
+conda env create -f environment.yml
+conda activate tcr-benchmark
+
+Step 3:
+bash run_all.sh
