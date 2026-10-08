@@ -11,7 +11,7 @@ Including TG4h as a predictor, alongside TG0h, allows a machine-learning model t
 Define the following quantities from the data-generating mechanism:
 
 - **TG0h** : baseline triglyceride (mg/dL), available at time 0
-- **TG4h** : post-heparin triglyceride (mg/dL), measured at 4 hours
+- **TG4h** : post-challenge triglyceride (mg/dL), measured at 4 hours
 - **TCR** : triglyceride clearance rate (%), defined as:
 
 $$\text{TCR} = \frac{\text{TG0h} - \text{TG4h}}{\text{TG0h}} \times 100$$
@@ -84,7 +84,7 @@ The same holds for any function of the clean predictors: in the null scenario, n
 
 Any published result with AUROC ≥ 0.70 in a paired triglyceride clearance task should be inspected for:
 
-1. Inclusion of TG4h or equivalent post-heparin measurements as predictors
+1. Inclusion of TG4h or equivalent post-challenge measurements as predictors
 2. Inclusion of TCR or its equivalent as a predictor
 3. Whether the label threshold was computed before or after train/test splitting
 

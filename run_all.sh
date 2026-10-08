@@ -242,6 +242,11 @@ python src/run_clean_pipeline.py \
     --out "${OUTDIR}/clean_results.csv" \
     --seed ${SEED_MAIN}
 
+# Table S9 Panel C: 30 repeated fold-sealed 5-fold CVs of the clean pipeline (full mode only)
+if ! $QUICK; then
+    python src/run_panelc_repeated_cv.py "${OUTDIR}/validation_panelC_repeated_cv.csv"
+fi
+
 echo "✓ Clean pipeline done. Expected AUROC ≈ 0.48–0.52 (TOST equiv. to 0.500)."
 _progress 3 "Clean pipeline done"
 
@@ -305,7 +310,14 @@ python src/run_bootstrap_adi.py \
     --shap_sample 200 \
     --seed ${SEED_MAIN}
 
-echo "✓ Bootstrap ADI done → bootstrap_adi.csv / bootstrap_adi_summary.csv"
+# Cross-classifier ADI bootstrap (RF / LR / XGB): rank stability, sign concordance and
+# pairwise Wilcoxon tests of ADI magnitudes (main text, cross-classifier SHAP paragraph)
+python src/adi_cross_classifier_bootstrap.py \
+    --data "${NULL_DATA}" \
+    --n_boot ${N_BOOT} \
+    --out_dir "${OUTDIR}"
+
+echo "✓ Bootstrap ADI done → bootstrap_adi.csv / bootstrap_adi_summary.csv / wilcoxon_summary.csv"
 _progress 7 "Bootstrap ADI done"
 
 # =============================================================================

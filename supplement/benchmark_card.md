@@ -34,7 +34,7 @@ Age, Sex, BMI, Haematocrit (Hct), Total Protein (TP), Whole Blood Viscosity (WBV
 
 ### Excluded from clean pipeline (leakage variables)
 
-- **TG4h** (post-heparin triglyceride) — mathematically embedded in outcome TCR
+- **TG4h** (post-challenge triglyceride) — mathematically embedded in outcome TCR
 - **TCR** (triglyceride clearance rate) — IS the outcome variable
 
 ---
@@ -43,7 +43,7 @@ Age, Sex, BMI, Haematocrit (Hct), Total Protein (TP), Whole Blood Viscosity (WBV
 
 | Task | Models | Metric |
 |------|--------|--------|
-| Clean baseline | LR, RF, XGB, SVM | AUROC (5×5 nested CV) |
+| Clean baseline | LR, RF, XGB, SVM | AUROC (stratified 5-fold CV, fixed hyperparameters) |
 | Leakage type 1–8 | LR, RF, XGB, SVM | AUROC + AUC Inflation |
 | SHAP attribution | RF, XGB | Attribution Distortion, FAR |
 | Scenario sensitivity | LR | AUROC mean ± SD (100 seeds) |

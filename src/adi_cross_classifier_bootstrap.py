@@ -23,7 +23,7 @@ except ImportError:
 
 SCRIPT_DIR   = os.path.dirname(os.path.abspath(__file__))
 DEFAULT_DATA = os.path.join(
-    os.path.dirname(SCRIPT_DIR), "data", "synthetic_null_seed42.csv")
+    os.path.dirname(SCRIPT_DIR), "data", "paired_tcr_null_v1_seed2026.csv")
 
 TCR_COL      = "tcr"
 TG4H_COL     = "tg4h"
@@ -361,6 +361,9 @@ def main():
     parser.add_argument("--seed",   type=int, default=42)
     parser.add_argument("--shap_n", type=int, default=300,
                         help="RF SHAP subsample size per resample (default 300)")
+    parser.add_argument("--out_dir",
+                        default=os.path.join(os.path.dirname(SCRIPT_DIR), "results", "tables"),
+                        help="Output directory (default: results/tables)")
     args = parser.parse_args()
 
     print(f"Data: {args.data}")
@@ -392,7 +395,8 @@ def main():
         df_full, clean_features, leaky_features,
         n_boot=args.n_boot, seed=args.seed, shap_subsample=args.shap_n)
 
-    out_dir = SCRIPT_DIR
+    out_dir = args.out_dir
+    os.makedirs(out_dir, exist_ok=True)
     df_boot.to_csv(os.path.join(out_dir, "adi_boot_results.csv"), index=False)
     print(f"\n[saved] adi_boot_results.csv  ({len(df_boot)} rows)")
 

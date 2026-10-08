@@ -1,6 +1,5 @@
 # Algebraic Definitional Leakage in Paired Biomedical Prediction Models
 ## A Reproducible Audit Framework and Benchmark
-## A Reproducible Synthetic-Data Benchmark
 
 [![CI](https://github.com/NattakittiP/algebraic-leakage-benchmark/actions/workflows/ci.yml/badge.svg)](https://github.com/NattakittiP/algebraic-leakage-benchmark/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
@@ -30,7 +29,7 @@ Because TG4h is algebraically embedded in TCR, including TG4h as a predictor con
 ```bash
 # 1. Clone and set up environment
 git clone https://github.com/NattakittiP/algebraic-leakage-benchmark.git
-cd tcr-leakage-benchmark
+cd algebraic-leakage-benchmark
 conda env create -f environment.yml
 conda activate tcr-benchmark
 
@@ -52,7 +51,7 @@ bash run_all.sh --quick
 ## Repository Structure
 
 ```
-tcr-leakage-benchmark/
+algebraic-leakage-benchmark/
 ├── .github/
 │   └── workflows/
 │       └── ci.yml                              # GitHub Actions CI
@@ -86,11 +85,16 @@ tcr-leakage-benchmark/
 │   ├── run_unified_shap.py                     # Unified SHAP / ADI analysis
 │   ├── run_cross_classifier_shap.py            # RF / LR / XGB SHAP comparison
 │   ├── run_bootstrap_adi.py                    # Bootstrap CIs for ADI
+│   ├── adi_cross_classifier_bootstrap.py       # Cross-classifier ADI bootstrap + Wilcoxon tests
+│   ├── run_panelc_repeated_cv.py               # Repeated-CV null check (Table S9 Panel C)
 │   ├── run_alternate_formula.py                # ATC additive-change benchmark
 │   ├── run_ratio_formula.py                    # Ratio-formula benchmark
 │   ├── run_scenario_sensitivity.py             # Scenario × seed sweep (S1)
+│   ├── run_scenario_leaky_check.py             # S1 clean vs TG4h-leaky AUROC per scenario (Table S3)
 │   ├── run_sample_size_sensitivity.py          # Sample-size sweep (S2)
+│   ├── run_s5_null_checkpointed.py             # Resumable re-run of the null sample-size sweep (Table S5)
 │   ├── run_noise_sensitivity.py                # Noise sensitivity (S3)
+│   ├── run_measurement_noise_prop2.py          # Proposition 2: measurement error on TG4h
 │   ├── run_missingness_sensitivity.py          # Missingness sensitivity (S4)
 │   ├── run_outlier_stress_test.py              # Outlier stress test (S5)
 │   ├── run_domain_shift.py                     # Domain-shift stress test
@@ -114,10 +118,9 @@ tcr-leakage-benchmark/
 │   └── utils.py                               # Preprocessing utilities (library)
 ├── supplement/
 │   ├── benchmark_card.md                       # Benchmark card
-│   ├── leakage_checklist.md                    # Leakage taxonomy checklist
+│   ├── leakage_checklist.md                    # POLRC 12-item checklist (standalone)
 │   ├── mathematical_appendix.md                # Mathematical derivations
-│   ├── simulation_protocol.md                  # Simulation protocol
-│   └── reviewer_response_bank.md              # Anticipated reviewer Q&A
+│   └── simulation_protocol.md                  # Pre-specified simulation protocol
 ├── tests/
 │   ├── conftest.py
 │   ├── test_generator_ranges.py
@@ -160,7 +163,20 @@ docker build -t tcr-leakage .
 docker run --rm -v $(pwd)/results:/workspace/results tcr-leakage bash run_all.sh
 ```
 
-**Requirements**: Python ≥ 3.10, scikit-learn ≥ 1.3, imbalanced-learn ≥ 0.11, xgboost ≥ 2.0, shap ≥ 0.44, matplotlib ≥ 3.7, pandas ≥ 2.0, numpy ≥ 1.24, PyYAML ≥ 6.0.
+**Requirements** (pinned in `requirements.txt`, used for all paper results): Python 3.10, numpy 1.26.4, pandas 2.1.4, scipy 1.11.4, scikit-learn 1.4.2, imbalanced-learn 0.11.0, xgboost 2.0.3, lightgbm 4.3.0, shap 0.44.0, matplotlib 3.8.4, PyYAML 6.0.1.
+
+### External cohort data (not included)
+
+Steps 18–27 of `run_all.sh` audit four real-world cohorts. Their data are **not** in this repository and must be obtained under the providers' data use agreements:
+
+| Cohort | Source | Expected local path |
+|--------|--------|---------------------|
+| eICU Collaborative Research Database (v2.0) | PhysioNet, credentialed access | `External Cohort/Dataset/eicu_label24h.csv`, `eicu_label48h.csv` |
+| MIMIC-IV (v2.2) | PhysioNet, credentialed access | `External Cohort/Dataset/full_analytic_dataset_mortality_all_admissions.csv` |
+| Curated Data for Describing Blood Glucose Management in the ICU (v1.0.1, https://doi.org/10.13026/517s-2q57) | PhysioNet, credentialed access | `curated-data-for-describing-blood-glucose-management-in-the-intensive-care-unit-1.0.1/` |
+| CGMacros | See the CGMacros data descriptor (Das et al., *Scientific Data*) | `CGMacros_dateshifted365/CGMacros_Dataset/` |
+
+These paths are listed in `.gitignore`; never commit patient-level data.
 
 ---
 
@@ -303,7 +319,7 @@ This runs all 29 steps in order and produces all tables and figures in `results/
 | 42   | Development / unit tests |
 | 2026 | **Main analysis** (primary paper results) |
 | 2027 | Domain-shift external validation set |
-| 1–100 | Robustness sweep across random seeds |
+| 1–100 | Robustness sweep across random seeds (S1) |
 
 **Critical**: The label column `low_TCR` is **NOT** pre-computed in the CSV files. It is derived inside each training fold from Q1 of that fold's TCR distribution. This prevents label leakage across folds.
 
@@ -319,7 +335,7 @@ All preprocessing parameters are derived exclusively from the training fold:
 
 ### Cross-Validation
 
-Nested 5×5 stratified k-fold cross-validation. Outer loop: performance estimation. Hyperparameters are fixed (no inner tuning loop) to isolate leakage effects from hyperparameter selection effects.
+Stratified 5-fold cross-validation with all preprocessing fitted inside each training fold. Hyperparameters are fixed (no inner tuning loop; `inner_folds` in `config/model_config.yaml` is reserved) to isolate leakage effects from hyperparameter-selection effects. The primary benchmark is one generated dataset (seed 2026, n = 1,500); reported SDs are across folds. Multi-seed analyses (S1–S5, domain shift, external cohorts) are run separately.
 
 ### Expected Results (Null Scenario, seed 2026)
 

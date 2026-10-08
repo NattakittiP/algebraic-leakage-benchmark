@@ -1,90 +1,112 @@
-# Paired Outcome Leakage Reporting Checklist (POLRC)
+# POLRC — Paired Outcome Leakage Reporting Checklist (v1.0)
 
-**Version:** 1.0  
-**Applies to:** Machine-learning studies using paired biomedical measurements (pre/post, baseline/endpoint)
+Standalone version of the 12-item audit instrument described in the paper
+(main text, POLRC section; full table and worked examples in Additional file 1, Section S1).
 
-Use this checklist when reporting, reviewing, or implementing ML pipelines with paired outcomes.  
-Answer YES/NO for each item. Any NO requires explicit justification in the manuscript.
+## How to use
 
----
+- Answer each item **Yes = 1 / No = 0 / N/A**.
+- Any **No** is a demonstrable leakage risk and needs explicit justification in the study report.
+- **Score** = proportion of *applicable* items answered Yes.
+- **Pass:** ≥ 83.3% of applicable items (10/12 when all items apply).
+- N/A is allowed only when an item is structurally inapplicable (e.g. B5 when no oversampling is used).
+  Items that cannot be determined from the report are recorded as such and excluded from the denominator.
 
-## Section A: Data Generation / Feature Engineering
-
-**A1. Outcome derivation check**  
-☐ Have you listed the mathematical formula used to derive each feature?  
-☐ Is any predictor a direct algebraic function of the outcome variable?  
-*If YES: that predictor constitutes definitional leakage and must be excluded from clean predictors.*
-
-**A2. TCR / ratio variables**  
-☐ If using a clearance rate, reduction rate, or any formula of the form (baseline − endpoint) / baseline, is the intermediate "endpoint" value excluded from predictors?  
-*Example: TCR = (TG0h − TG4h)/TG0h × 100 → including TG4h reconstructs TCR exactly.*
-
-**A3. Temporal contamination**  
-☐ Are all predictors temporally prior to or simultaneous with the baseline measurement?  
-☐ Are no post-treatment measurements used as predictors (except when studying treatment response)?
+Items A1–A3 address Tier 1 (algebraically deterministic) leakage, B1–B6 address Tier 2
+(preprocessing) leakage, and C1–C3 address evaluation and reproducibility.
 
 ---
 
-## Section B: Label / Target Construction
+## Domain A — Data generation (formula audit)
 
-**B4. Threshold derivation**  
-☐ Is the label threshold (e.g., Q1 of TCR) computed ONLY from training-fold data?  
-☐ Is the global threshold (computed before any split) explicitly NOT used in the clean pipeline?
+**A1. Formula listing and mathematical coupling** (L1, L2)
+Have you listed every formula used to derive labels and features? Is any predictor a component
+of the outcome formula (e.g. the baseline *A*)? If yes, justify its inclusion and report the
+coupling; if the predictors jointly determine the outcome, exclude the component.
+- Pass: feature list annotated; no algebraic antecedent in the predictor set.
+- Fail: TG4h included when the label is derived from TCR = f(TG0h, TG4h).
 
-**B5. Label encoding documentation**  
-☐ Is the label threshold value reported (not just "Q1")?  
-☐ Is the threshold verified to be stable across folds (SD < 10% of mean threshold)?
+**A2. Post-baseline component excluded** (L1)
+If using a clearance/response formula *Y = h(A, B)*, is the post-baseline component *B* excluded
+from the predictors?
+- Pass: `peak_cgm` excluded when *Y* = `peak_cgm` − `pre_meal_cgm`.
+- Fail: `peak_cgm` included in the feature set.
+
+**A3. Temporal ordering** (L1)
+Are all predictors measured before the outcome? Are post-treatment values excluded (unless the
+response itself is the target)?
+- Pass: temporal diagram provided; no post-treatment features.
+- Fail: a post-discharge status field included in mortality prediction.
+
+## Domain B — Label construction and preprocessing
+
+**B1. Fold-sealed label threshold** (L5)
+Is the label threshold computed only from training-fold data, with no global threshold in the
+clean pipeline?
+- Pass: Q1 computed inside each CV fold; test-fold labels assigned after the split.
+- Fail: global Q1 computed on the full dataset before splitting.
+
+**B2. Threshold reported** (L5)
+Is the threshold value reported numerically, and is the fold-to-fold threshold SD < 10% of the
+mean threshold?
+- Pass: "Q1 = 28.4 mg/dL; fold SD = 1.2 mg/dL (4.2%)".
+
+**B3. Fold-sealed scaling** (L3)
+Is the scaler fitted only on training-fold data, with explicit code documentation?
+- Pass: `scaler.fit(X_train)` inside the CV loop.
+- Fail: `scaler.fit(X_all)` before splitting.
+
+**B4. Fold-sealed winsorisation / clipping** (L4)
+Are winsorisation or clipping bounds computed from training data only?
+- Pass: 1st–99th percentile bounds from the training fold.
+- Fail: bounds computed on the entire dataset.
+
+**B5. Fold-sealed oversampling** (L6)
+Is oversampling (SMOTE, etc.) applied only inside each training fold, after the train/test split?
+- Pass: SMOTE in the pipeline after the split.
+- Fail: SMOTE applied to the full dataset before CV.
+
+**B6. Fold-sealed feature selection** (L7)
+If feature selection is performed, is it based only on training-fold data?
+- Pass: univariate filter fitted on `X_train` inside the loop.
+- Fail: features selected by correlation on the full dataset.
+
+## Domain C — Evaluation and reproducibility
+
+**C1. Fold-sealed evaluation design**
+Are all preprocessing parameters (scaler, imputer, selector) fitted exclusively within each
+training fold? Are ≥ 5 outer folds and ≥ 10 random seeds used?
+- Pass: fold-sealed pipeline; 5-fold × 30 seeds reported.
+
+**C2. Metrics beyond AUROC**
+Are PR-AUC and Brier score reported alongside AUROC? Is the calibration slope reported?
+(A slope far above 1 under in-distribution, near-deterministic prediction is a leakage warning sign.)
+- Pass: AUROC + PR-AUC + Brier + calibration slope all reported.
+- Fail: AUROC only; a slope of 3.6 left unreported.
+
+**C3. Reproducibility**
+Is the code publicly available? Can the results be reproduced with a single command? Are all
+random seeds and package versions pinned?
+- Pass: public repository + `bash run_all.sh` + `requirements.txt`.
+- Fail: code "available upon request"; seeds not stated.
 
 ---
 
-## Section C: Preprocessing
+## Scoring sheet
 
-**B6. Scaler fold-sealing**  
-☐ Is the StandardScaler (or similar) fitted ONLY on training fold data?  
-☐ Is there explicit code documentation confirming this?
+| Item | Yes | No | N/A | Notes |
+|------|-----|----|-----|-------|
+| A1 | ☐ | ☐ | ☐ | |
+| A2 | ☐ | ☐ | ☐ | |
+| A3 | ☐ | ☐ | ☐ | |
+| B1 | ☐ | ☐ | ☐ | |
+| B2 | ☐ | ☐ | ☐ | |
+| B3 | ☐ | ☐ | ☐ | |
+| B4 | ☐ | ☐ | ☐ | |
+| B5 | ☐ | ☐ | ☐ | |
+| B6 | ☐ | ☐ | ☐ | |
+| C1 | ☐ | ☐ | ☐ | |
+| C2 | ☐ | ☐ | ☐ | |
+| C3 | ☐ | ☐ | ☐ | |
 
-**B7. Winsorisation fold-sealing**  
-☐ Are winsorisation percentile bounds computed from training data only?
-
-**B8. SMOTE / oversampling timing**  
-☐ Is oversampling applied ONLY after the train/test split (inside each fold)?  
-☐ Is SMOTE applied BEFORE the validation fold is separated? (This is the leak — it must NOT happen.)
-
-**B9. Feature selection timing**  
-☐ If feature selection is performed, is the selection based ONLY on training-fold data?  
-☐ Is there a separate test confirming no test-set information was used?
-
----
-
-## Section D: Model Evaluation
-
-**B10. Nested CV documentation**  
-☐ Is nested cross-validation used (separate inner and outer folds)?  
-☐ Are outer-fold AUROC values reported separately before averaging?  
-☐ Is the number of folds justified (recommend outer ≥ 5, inner ≥ 5)?
-
-**B11. Multiple metrics**  
-☐ Are PR-AUC and Brier score reported in addition to AUROC?  
-☐ Is calibration assessed (ECE or calibration slope)?
-
----
-
-## Section E: Transparency and Reproducibility
-
-**B12. Reproducibility package**  
-☐ Is the code publicly available with a DOI (e.g., Zenodo)?  
-☐ Can results be reproduced with a single command (e.g., `bash run_all.sh`)?  
-☐ Is a pinned `environment.yml` or `requirements.txt` provided?  
-☐ Is the random seed explicitly stated for all analyses?
-
----
-
-## Scoring
-
-- **12/12**: Fully compliant — no known leakage concerns
-- **10–11/12**: Minor gaps — address in revision
-- **< 10/12**: Substantial concerns — major revision required before publication
-
----
-
-*This checklist was developed as part of the TCR Leakage Benchmark (BMC Bioinformatics, 2026).*
+**Score** = Yes / (12 − N/A) = ____ %  →  Pass if ≥ 83.3%
