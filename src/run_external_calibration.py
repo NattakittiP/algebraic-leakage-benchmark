@@ -278,7 +278,7 @@ def plot_calibration_summary_figure(df_results: pd.DataFrame, figdir: Path) -> N
 
     fig.suptitle(
         "Calibration Metrics: Clean vs Leaky Pipelines\n"
-        "(Leaky: ECE ↑, slope << 1  →  overconfident, miscalibrated predictions)",
+        "(Leaky: calibration slope far from 1 under near-perfect separation)",
         fontsize=11, y=1.02,
     )
     plt.tight_layout()

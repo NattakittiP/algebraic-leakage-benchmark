@@ -353,6 +353,9 @@ python src/run_scenario_sensitivity.py \
     --n ${N_MAIN} \
     ${SAMPLE_SIZE_FLAG}
 
+# S1 clean + TG4h-leaky AUROC per scenario x seed (LR, fold-sealed; Additional file 1, Table S3)
+python src/run_scenario_leaky_check.py LogisticRegression ${N_SEEDS_SCENARIO} "${OUTDIR}/scenario_leaky_check.csv" 2
+
 echo "✓ Scenario sensitivity done → scenario_sensitivity.csv"
 _progress 10 "Scenario sensitivity done"
 
@@ -387,6 +390,12 @@ python src/run_noise_sensitivity.py \
     --figdir "${FIGDIR}" \
     --n ${N_MAIN} \
     --seeds ${N_SEEDS_NOISE}
+
+# Proposition 2 literal test: additive Gaussian measurement error on TG4h
+python src/run_measurement_noise_prop2.py \
+    --seeds ${N_SEEDS_NOISE} \
+    --n ${N_MAIN} \
+    --out "${OUTDIR}/measurement_noise_prop2.csv"
 
 echo "✓ Noise sensitivity done → noise_sensitivity.csv"
 _progress 12 "Noise sensitivity done"
