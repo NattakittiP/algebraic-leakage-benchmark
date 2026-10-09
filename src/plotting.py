@@ -234,11 +234,14 @@ def figure5_scenario_sensitivity(sensitivity_csv: Path, out_path: Path):
     bp = ax.boxplot(
         data_by_scenario,
         patch_artist=True,
-        tick_labels=scenario_labels,
         widths=0.5,
         showfliers=True,
         flierprops=dict(marker="o", markersize=3, alpha=0.4),
     )
+    # Set tick labels separately: `tick_labels=` needs matplotlib >= 3.9,
+    # while requirements.txt pins matplotlib 3.8.4.
+    ax.set_xticks(range(1, len(scenario_labels) + 1))
+    ax.set_xticklabels(scenario_labels)
 
     palette = [PALETTE_CLEAN, PALETTE_MEDIUM, "#F4A460", PALETTE_WBV]
     for patch, color in zip(bp["boxes"], palette):
